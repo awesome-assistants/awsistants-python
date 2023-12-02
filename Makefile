@@ -18,6 +18,7 @@ release:
 	git add .
 	git commit -m "Release $(shell poetry version -s)"
 	git tag v$(shell poetry version -s)
+	git push origin --tags
 
 version:
 	poetry version --short
