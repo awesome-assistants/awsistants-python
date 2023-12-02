@@ -14,6 +14,9 @@ lint:
 test:
 	poetry run pytest
 
+bump:
+	poetry version minor
+
 release:
 	git add .
 	git commit -m "Release $(shell poetry version -s)"
