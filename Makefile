@@ -15,7 +15,9 @@ test:
 	poetry run pytest
 
 release:
-	poetry version patch
+	git add .
+	git commit -m "Release $(shell poetry version -s)"
+	git tag v$(shell poetry version -s)
 
 version:
 	poetry version --short
