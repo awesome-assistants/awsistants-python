@@ -1,6 +1,6 @@
 #!make
 
-all: install download lint test release build
+all: install download lint test build
 
 install:
 	poetry install --with test
