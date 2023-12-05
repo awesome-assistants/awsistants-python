@@ -26,4 +26,4 @@ jobs:
         with:
           path: .venv
           key: pydeps-${{ hashFiles('**/poetry.lock') }}
-      - run: make all
+      - run: make ci
