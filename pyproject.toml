@@ -22,6 +22,9 @@ include = ["awsistants/assistants.json"]
 [tool.poetry.dependencies]
 python = "^3.8"
 
+[tool.poetry.group.dev.dependencies]
+towncrier = "^23.6.0"
+
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.3"
 black = "^23.11.0"
@@ -29,3 +32,44 @@ black = "^23.11.0"
 [project.urls]
 Homepage = "https://github.com/awesome-assistants/awsistants-python"
 Issues = "https://github.com/awesome-assistants/awsistants-python/issues"
+
+[tool.towncrier]
+filename = "changelog.md"
+title_format = "## awsistants {version} ({project_date})"
+underlines = ["", "", ""]
+issue_format = "[#{issue}](https://github.com/awesome-assistants/awsistants-python/pulls/{issue})"
+
+  [[tool.towncrier.type]]
+  directory = "breaking"
+  name = "Breaking Changes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "deprecation"
+  name = "Deprecations"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "feature"
+  name = "Features"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "improvement"
+  name = "Improvements"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "fix"
+  name = "Bug Fixes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "docs"
+  name = "Improved Documentation"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "trivial"
+  name = "Trivial/Internal Changes"
+  showcontent = false

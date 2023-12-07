@@ -1,11 +1,10 @@
 #!make
 
-ci: install download lint test build
-
-all: install download lint test build bump release
+all: install download lint test build
 
 install:
-	poetry install --with test
+	poetry lock
+	poetry install --with test,dev
 
 download:
 	wget -O awsistants/assistants.json https://raw.githubusercontent.com/awesome-assistants/awesome-assistants/main/build/assistants.json
@@ -16,23 +15,16 @@ lint:
 test:
 	poetry run pytest
 
-bump:
-	poetry version minor
-
-release:
-	git add .
-	git commit -m "Release $(shell poetry version -s)"
-	git tag v$(shell poetry version -s)
-	git push origin --tags
-
-version:
-	poetry version --short
-
 build:
 	poetry build
 
-publish:
-	poetry publish
+changelog:
+	poetry run towncrier build --yes --version v$(shell poetry version -s)
+
+publish-test:
+	poetry build
+	poetry config repositories.testpypi https://test.pypi.org/legacy/
+	poetry publish --no-interaction -r testpypi -u __token__ -p ${PYPI_TOKEN}
 
 clean:
 	rm -rf dist
